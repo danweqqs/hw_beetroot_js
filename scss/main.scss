@@ -1,0 +1,41 @@
+@use 'vars' as v;
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+html, body {
+    margin: 0 0;
+    min-height: 100vh;
+    font-size: v.$font-size;
+    font-family: v.$font-family-main;
+    color: v.$font-color;
+    background: v.$backgorund-main;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.container {
+    max-width: v.$width-container;
+    margin: 0 auto;
+}
+.title {
+    font-weight: 500;
+}
+.header {
+    background: linear-gradient(#14405b, #7a8097);
+    padding: 16px 0;
+}
+.main {
+    flex-grow: 1;
+}
+.lesson-list {
+    padding-left: 24px;
+    list-style: none;
+}
+.footer {
+    background: linear-gradient(#4e5263, #0d2d41, );
+    padding: 28px 0;
+}

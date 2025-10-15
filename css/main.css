@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+html, body {
+  margin: 0 0;
+  min-height: 100vh;
+  font-size: 17px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #ffddff;
+  background: linear-gradient(#495665, #247e94);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.title {
+  font-weight: 500;
+}
+
+.header {
+  background: linear-gradient(#14405b, #7a8097);
+  padding: 16px 0;
+}
+
+.main {
+  flex-grow: 1;
+}
+
+.lesson-list {
+  padding-left: 24px;
+  list-style: none;
+}
+
+.footer {
+  background: linear-gradient(#4e5263, #0d2d41);
+  padding: 28px 0;
+}/*# sourceMappingURL=main.css.map */
