@@ -138,22 +138,4 @@ while (true) {
   }
 }
 
-// 2️⃣ Таблиця множення -------------------- (🔁 подвійний цикл)
-for (let i = 2; i <= 9; i++) {
-    console.log(`Таблиця множення для ${i}:`);
-    for (let j = 1; j <= 10; j++) {
-        console.log(`${i} x ${j} = ${i * j}`);
-    }
-    console.log('-------------------');
-}
-
-
-// 3️⃣ Наступна дата ----------------------
-let day1 = +prompt('Введіть день:');
-let month = +prompt('Введіть місяць:');
-let year = +prompt('Введіть рік:');
-
-let date = new Date(year, month - 1, day1);
-date.setDate(date.getDate() + 1);
-
-alert(`Наступна дата: ${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`);
+// 10 і 11 покинуло час(
