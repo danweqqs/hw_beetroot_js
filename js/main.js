@@ -18,11 +18,11 @@ const car = {
 
   showInfo() {
     console.log(`Машина: ${this.brand} ${this.model} (${this.year})
-Ціна: ${this.price.toLocaleString()} грн
-Середня швидкість: ${this.avgSpeed} км/год
-Бак: ${this.tankSize} л
-Витрата палива: ${this.fuelUse} л / 100 км
-Водії: ${this.drivers.join(', ')}`);
+      Ціна: ${this.price.toLocaleString()} грн
+      Середня швидкість: ${this.avgSpeed} км/год
+      Бак: ${this.tankSize} л
+      Витрата палива: ${this.fuelUse} л / 100 км
+      Водії: ${this.drivers.join(', ')}`);
   },
 
 
@@ -47,14 +47,14 @@ const car = {
 
   // 1.4
   tripInfo(distance) {
-    const time = distance / this.avgSpeed;          // години руху
-    const breaks = Math.floor(time / 4);            // кожні 4 год — 1 год відпочинку
+    const time = distance / this.avgSpeed;
+    const breaks = Math.floor(time / 4);
     const totalTime = time + breaks;
-    const fuel = (distance / 100) * this.fuelUse;   // потрібне паливо
+    const fuel = (distance / 100) * this.fuelUse;
 
     console.log(`Відстань: ${distance} км
-Час у дорозі (з відпочинком): ${totalTime.toFixed(1)} год
-Потрібно палива: ${fuel.toFixed(1)} л`);
+      Час у дорозі (з відпочинком): ${totalTime.toFixed(1)} год
+      Необхідна кількість палива: ${fuel.toFixed(1)} л`);
   }
 };
 
@@ -107,6 +107,6 @@ const time = {
 };
 
 time.showTime();
-time.addSeconds(30, 'при додванні 30 секунд');
-time.addMinutes(75, 'при додванні 75 хвилин');
-time.addHours(12, 'при додванні 12 годин');
+time.addSeconds(30);
+time.addMinutes(75);
+time.addHours(12);
