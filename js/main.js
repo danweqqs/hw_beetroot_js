@@ -1,114 +1,112 @@
 'use strict';
 
-// 2
-function showArgumentsCount() {
-  let count = 0;
+// 1.1
+// Lamborghini Urus 2020
+// https://auto.ria.com/uk/auto_lamborghini_urus_38573832.html
 
-  while (true) {
-    let number = prompt("Введіть число (або натисніть Скасувати, щоб завершити):");
+console.log('завдання 1 (опис ламби)');
 
-    if (number === null || number.trim() === "") {
-      break;
+const car = {
+  brand: 'Lamborghini',
+  model: 'Urus',
+  year: 2020,
+  avgSpeed: 120,
+  tankSize: 85,
+  fuelUse: 15,
+  price: 10943400,
+  drivers: ['Даніїл'],
+
+  showInfo() {
+    console.log(`Машина: ${this.brand} ${this.model} (${this.year})
+Ціна: ${this.price.toLocaleString()} грн
+Середня швидкість: ${this.avgSpeed} км/год
+Бак: ${this.tankSize} л
+Витрата палива: ${this.fuelUse} л / 100 км
+Водії: ${this.drivers.join(', ')}`);
+  },
+
+
+  // 1.2
+  addDriver(name) {
+    if (!this.drivers.includes(name)) {
+      this.drivers.push(name);
+      console.log(`Машиною заволодів новий водій: ${name}`);
+    } else {
+      console.log(`${name} вже є у списку водіїв, пупупу.`);
     }
-    count++;
-  }
-  alert(`Ви ввели ${count} чисел.`);
-}
+  },
 
-showArgumentsCount();
-
-
-// 3
-function compareNumbers(a, b) {
-  if (a < b) {
-    return "Перше число менше за друге.";
-  } else if (a > b) {
-    return "Перше число більше за друге.";
-  } else {
-    return "Числа рівні.";
-  }
-}
-
-let first = Number(prompt("Введіть перше число:"));
-let second = Number(prompt("Введіть друге число:"));
-
-alert(compareNumbers(first, second));
-
-// 4
-function factorial(number) {
-  if (number < 0) {
-    alert("Такого факторіалу не існує");
-    return;
-  }
-
-  if (number === 0 || number === 1) {
-    return 1;
-  }
-
-  return number * factorial(number - 1);
-}
-
-let userNumber = Number(prompt("Введіть число, для якого потрібно обчислити факторіал:"));
-
-if (isNaN(userNumber)) {
-  alert("Будь ласка, введіть коректне число");
-} else {
-  let result = factorial(userNumber);
-  if (result !== undefined) {
-    alert(`Факторіал числа ${userNumber} дорівнює ${result}`);
-  }
-}
-
-// 5
-function makeNumber(first, second, third) {
-  let result = first + second + third;
-  return Number(result);
-}
-
-let firstDigit = prompt("Введіть першу цифру:");
-let secondDigit = prompt("Введіть другу цифру:");
-let thirdDigit = prompt("Введіть третю цифру:");
-
-let numberResult = makeNumber(firstDigit, secondDigit, thirdDigit);
-alert("Ваше число: " + numberResult);
-
-// 6
-function calculateArea(length, width) {
-  if (!width) {
-    return length * length;
-  } else {
-    return length * width;
-  }
-}
-
-let lengthValue = Number(prompt("Введіть довжину:"));
-let widthValue = prompt("Введіть ширину (якщо квадрат - залиште порожнім):");
-
-let area = calculateArea(lengthValue, widthValue ? Number(widthValue) : undefined);
-alert("Площа вашої фігури дорівнює: " + area);
-
-// 7
-function isPerfectNumber(number) {
-  if (number <= 1) {
-    return 0;
-  }
-
-  let sum = 0;
-
-  for (let i = 1; i < number; i++) {
-    if (number % i === 0) {
-      sum = sum + i;
+  // 1.3
+  hasDriver(name) {
+    if (this.drivers.includes(name)) {
+      console.log(`${name} може керувати Lamborghini Urus.`);
+    } else {
+      console.log(`${name} не внесений у список водіїв.`);
     }
+  },
+
+  // 1.4
+  tripInfo(distance) {
+    const time = distance / this.avgSpeed;          // години руху
+    const breaks = Math.floor(time / 4);            // кожні 4 год — 1 год відпочинку
+    const totalTime = time + breaks;
+    const fuel = (distance / 100) * this.fuelUse;   // потрібне паливо
+
+    console.log(`Відстань: ${distance} км
+Час у дорозі (з відпочинком): ${totalTime.toFixed(1)} год
+Потрібно палива: ${fuel.toFixed(1)} л`);
   }
-  return sum === number;
-}
+};
 
-let inputNumber = Number(prompt("Введіть число для перевірки:"));
+car.showInfo();
+car.addDriver('Іван');
+car.hasDriver('Роман');
+car.tripInfo(1000);
 
-if (isPerfectNumber(inputNumber)) {
-  alert("Це досконале число!");
-} else {
-  alert("Це не досконале число");
-}
+console.log('завдання 2 (опис часу, якого в нас нема)');
 
-// 8 плаче в сторонці
+const time = {
+  hours: 20,
+  minutes: 59,
+  seconds: 45,
+
+  // 2.1
+  showTime() {
+    console.log(`Поточний час: ${this.hours} год ${this.minutes} хв ${this.seconds} сек`);
+  },
+
+  // 2.2
+  addSeconds(sec) {
+    this.seconds += sec;
+    while (this.seconds >= 60) {
+      this.seconds -= 60;
+      this.minutes++;
+    }
+
+    while (this.minutes >= 60) {
+      this.minutes -= 60;
+      this.hours++;
+    }
+
+    while (this.hours >= 24) {
+      this.hours -= 24;
+    }
+
+    this.showTime();
+  },
+
+  // 2.3
+  addMinutes(min) {
+    this.addSeconds(min * 60);
+  },
+
+  // 2.4
+  addHours(hr) {
+    this.addSeconds(hr * 3600);
+  }
+};
+
+time.showTime();
+time.addSeconds(30, 'при додванні 30 секунд');
+time.addMinutes(75, 'при додванні 75 хвилин');
+time.addHours(12, 'при додванні 12 годин');
