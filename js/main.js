@@ -1,112 +1,112 @@
 'use strict';
 
-// 1.1
-// Lamborghini Urus 2020
-// https://auto.ria.com/uk/auto_lamborghini_urus_38573832.html
 
-console.log('завдання 1 (опис ламби)');
+let shoppingList = [
+    { name: 'iPhone 17', quantity: 1, isBought: false, price: 45000, total: 45000 },
+    { name: 'MacBook Air M3', quantity: 1, isBought: true, price: 58000, total: 58000 },
+    { name: 'AirPods Pro 2', quantity: 2, isBought: false, price: 12000, total: 24000 },
+    { name: 'Apple Watch SE', quantity: 1, isBought: true, price: 12500, total: 12500 }
+];
 
-const car = {
-  brand: 'Lamborghini',
-  model: 'Urus',
-  year: 2020,
-  avgSpeed: 120,
-  tankSize: 85,
-  fuelUse: 15,
-  price: 10943400,
-  drivers: ['Даніїл'],
+// 1 вивести весь список покупок
+function showList() {
+    console.log('Список покупок:');
 
-  showInfo() {
-    console.log(`Машина: ${this.brand} ${this.model} (${this.year})
-Ціна: ${this.price.toLocaleString()} грн
-Середня швидкість: ${this.avgSpeed} км/год
-Бак: ${this.tankSize} л
-Витрата палива: ${this.fuelUse} л / 100 км
-Водії: ${this.drivers.join(', ')}`);
-  },
+    console.log('Не куплено: ');
+    for (let item of shoppingList) {
+        if (!item.isBought) {
+            console.log(`${item.name} — ${item.quantity} шт × ${item.price} грн = ${item.total} грн`);
+        }
+    }
+    console.log('Куплено: ');
+    for (let item of shoppingList) {
+        if (item.isBought) {
+            console.log(`${item.name} — ${item.quantity} шт × ${item.price} грн = ${item.total} грн`);
+        }
+    }
+}
 
 
-  // 1.2
-  addDriver(name) {
-    if (!this.drivers.includes(name)) {
-      this.drivers.push(name);
-      console.log(`Машиною заволодів новий водій: ${name}`);
+// 2 позначити товар як куплений
+function buyProduct(productName) {
+    const product = shoppingList.find(item => item.name.toLowerCase() === productName.toLowerCase());
+
+    if (product) {
+        product.isBought = true;
+        console.log(`Товар "${product.name}" позначено як куплений.`);
     } else {
-      console.log(`${name} вже є у списку водіїв, пупупу.`);
+        console.log(`Товар "${productName}" не знайдено у списку.`);
     }
-  },
+}
 
-  // 1.3
-  hasDriver(name) {
-    if (this.drivers.includes(name)) {
-      console.log(`${name} може керувати Lamborghini Urus.`);
+
+// 3 видалити товар зі списку
+function deleteProduct(productName) {
+    const newList = shoppingList.filter(item => item.name.toLowerCase() !== productName.toLowerCase());
+
+    if (newList.length === shoppingList.length) {
+        console.log(`Товар "${productName}" не знайдено у списку.`);
     } else {
-      console.log(`${name} не внесений у список водіїв.`);
+        shoppingList = newList;
+        console.log(`Товар "${productName}" видалено зі списку.`);
     }
-  },
+}
 
-  // 1.4
-  tripInfo(distance) {
-    const time = distance / this.avgSpeed;          // години руху
-    const breaks = Math.floor(time / 4);            // кожні 4 год — 1 год відпочинку
-    const totalTime = time + breaks;
-    const fuel = (distance / 100) * this.fuelUse;   // потрібне паливо
 
-    console.log(`Відстань: ${distance} км
-Час у дорозі (з відпочинком): ${totalTime.toFixed(1)} год
-Потрібно палива: ${fuel.toFixed(1)} л`);
-  }
-};
+// 4 додати товар у список або оновити кількість, якщо він уже є
+function addProduct(name, quantity, price) {
+    const existingProduct = shoppingList.find(item => item.name.toLowerCase() === name.toLowerCase());
 
-car.showInfo();
-car.addDriver('Іван');
-car.hasDriver('Роман');
-car.tripInfo(1000);
-
-console.log('завдання 2 (опис часу, якого в нас нема)');
-
-const time = {
-  hours: 20,
-  minutes: 59,
-  seconds: 45,
-
-  // 2.1
-  showTime() {
-    console.log(`Поточний час: ${this.hours} год ${this.minutes} хв ${this.seconds} сек`);
-  },
-
-  // 2.2
-  addSeconds(sec) {
-    this.seconds += sec;
-    while (this.seconds >= 60) {
-      this.seconds -= 60;
-      this.minutes++;
+    if (existingProduct) {
+        existingProduct.quantity += quantity;
+        existingProduct.total = existingProduct.quantity * existingProduct.price;
+        console.log(`Оновлено кількість: ${existingProduct.name} (${existingProduct.quantity} шт, ${existingProduct.total} грн).`);
+    } else {
+        shoppingList.push({
+            name,
+            quantity,
+            price,
+            total: quantity * price,
+            isBought: false
+        });
+        console.log(`Додано новий товар: ${name}.`);
     }
+}
 
-    while (this.minutes >= 60) {
-      this.minutes -= 60;
-      this.hours++;
+
+// 5 підрахунок загальної суми всіх товарів
+function calcTotalSum() {
+    let total = 0;
+    for (let item of shoppingList) {
+        total += item.total;
     }
+    console.log(`Загальна сума покупок: ${total} грн.`);
+    return total;
+}
 
-    while (this.hours >= 24) {
-      this.hours -= 24;
+
+// 6 підрахунок суми куплених або некуплених товарів
+function calcSumByStatus(isBought) {
+    let total = 0;
+
+    for (let item of shoppingList) {
+        if (item.isBought === isBought) {
+            total += item.total;
+        }
     }
+    const statusText = isBought ? 'куплених' : 'ще не куплених';
+    console.log(`Сума ${statusText} товарів: ${total} грн.`);
+    return total;
+}
 
-    this.showTime();
-  },
+showList();
+buyProduct('AirPods Pro 2');
+addProduct('iPad Air', 1, 18000);
+addProduct('iPhone 17', 1, 45000);
+deleteProduct('Apple Watch SE');
 
-  // 2.3
-  addMinutes(min) {
-    this.addSeconds(min * 60);
-  },
+showList();
 
-  // 2.4
-  addHours(hr) {
-    this.addSeconds(hr * 3600);
-  }
-};
-
-time.showTime();
-time.addSeconds(30, 'при додванні 30 секунд');
-time.addMinutes(75, 'при додванні 75 хвилин');
-time.addHours(12, 'при додванні 12 годин');
+calcTotalSum();
+calcSumByStatus(true);
+calcSumByStatus(false);
