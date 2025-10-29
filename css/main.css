@@ -41,4 +41,20 @@ html, body {
 .footer {
   background: linear-gradient(#4e5263, #0d2d41);
   padding: 28px 0;
+}
+
+.video-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #662677;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.video-button:hover {
+  background-color: #2563eb;
 }/*# sourceMappingURL=main.css.map */
