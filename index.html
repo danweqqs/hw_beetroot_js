@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monticello</title>
+    <link rel="icon" type="image/png" href="./assets/img/favi.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/main.css" />
+</head>
+
+<body>
+    <section class="section__header">
+        <header class="header">
+            <div class="header__container">
+                <div class="header__logo">
+                    <img src="./assets/img/logo.png" alt="Monticello Logo" />
+                </div>
+
+                <nav class="header__nav">
+                    <ul>
+                        <li><a href="#">ABOUT US</a></li>
+                        <li><a href="#project">PROJECTS</a></li>
+                        <li><a href="#news">NEWS</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header__socials">
+                    <a href="#" class="social__link">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8 9H5.65625V16H2.53125V9H0V6.09375H2.53125V3.90625C2.53125 3.07292 2.6875 2.36458 3 1.78125C3.3125 1.19792 3.75 0.760417 4.3125 0.46875C4.89583 0.15625 5.5625 0 6.3125 0C6.64583 0 7 0.0208333 7.375 0.0625C7.75 0.0833333 8.04167 0.114583 8.25 0.15625L8.5625 0.1875V2.65625H7.3125C6.72917 2.65625 6.30208 2.8125 6.03125 3.125C5.78125 3.41667 5.65625 3.78125 5.65625 4.21875V6.09375H8.4375L8 9Z"
+                                fill="white" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social__link">
+                        <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.3438 3.25C14.3646 3.33333 14.375 3.46875 14.375 3.65625C14.375 4.76042 14.1667 5.86458 13.75 6.96875C13.3333 8.05208 12.7396 9.05208 11.9688 9.96875C11.2188 10.8646 10.2396 11.5938 9.03125 12.1562C7.82292 12.7188 6.48958 13 5.03125 13C3.19792 13 1.52083 12.5104 0 11.5312C0.229167 11.5521 0.489583 11.5625 0.78125 11.5625C2.30208 11.5625 3.66667 11.0938 4.875 10.1562C4.14583 10.1562 3.5 9.94792 2.9375 9.53125C2.39583 9.09375 2.02083 8.55208 1.8125 7.90625C2.02083 7.92708 2.21875 7.9375 2.40625 7.9375C2.69792 7.9375 2.98958 7.90625 3.28125 7.84375C2.78125 7.73958 2.33333 7.53125 1.9375 7.21875C1.54167 6.90625 1.22917 6.53125 1 6.09375C0.770833 5.63542 0.65625 5.14583 0.65625 4.625V4.5625C1.11458 4.83333 1.60417 4.97917 2.125 5C1.14583 4.33333 0.65625 3.41667 0.65625 2.25C0.65625 1.66667 0.8125 1.11458 1.125 0.59375C1.9375 1.61458 2.92708 2.42708 4.09375 3.03125C5.28125 3.63542 6.54167 3.96875 7.875 4.03125C7.83333 3.78125 7.8125 3.53125 7.8125 3.28125C7.8125 2.38542 8.125 1.61458 8.75 0.96875C9.39583 0.322917 10.1667 0 11.0625 0C12.0208 0 12.8229 0.34375 13.4688 1.03125C14.2188 0.885417 14.9167 0.625 15.5625 0.25C15.3125 1.02083 14.8333 1.625 14.125 2.0625C14.75 1.97917 15.375 1.80208 16 1.53125C15.5417 2.19792 14.9896 2.77083 14.3438 3.25Z"
+                                fill="white" />
+                        </svg>
+                    </a>
+                    <a href="#" class="social__link">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M4.4375 4.46875C5.14583 3.76042 6 3.40625 7 3.40625C8 3.40625 8.84375 3.76042 9.53125 4.46875C10.2396 5.15625 10.5938 6 10.5938 7C10.5938 8 10.2396 8.85417 9.53125 9.5625C8.84375 10.25 8 10.5938 7 10.5938C6 10.5938 5.14583 10.25 4.4375 9.5625C3.75 8.85417 3.40625 8 3.40625 7C3.40625 6 3.75 5.15625 4.4375 4.46875ZM5.34375 8.65625C5.80208 9.11458 6.35417 9.34375 7 9.34375C7.64583 9.34375 8.19792 9.11458 8.65625 8.65625C9.11458 8.19792 9.34375 7.64583 9.34375 7C9.34375 6.35417 9.11458 5.80208 8.65625 5.34375C8.19792 4.88542 7.64583 4.65625 7 4.65625C6.35417 4.65625 5.80208 4.88542 5.34375 5.34375C4.88542 5.80208 4.65625 6.35417 4.65625 7C4.65625 7.64583 4.88542 8.19792 5.34375 8.65625ZM11.3125 2.6875C11.4792 2.83333 11.5625 3.02083 11.5625 3.25C11.5625 3.47917 11.4792 3.67708 11.3125 3.84375C11.1667 4.01042 10.9792 4.09375 10.75 4.09375C10.5208 4.09375 10.3229 4.01042 10.1562 3.84375C9.98958 3.67708 9.90625 3.47917 9.90625 3.25C9.90625 3.02083 9.98958 2.83333 10.1562 2.6875C10.3229 2.52083 10.5208 2.4375 10.75 2.4375C10.9792 2.4375 11.1667 2.52083 11.3125 2.6875ZM13.9688 4.125C13.9896 4.6875 14 5.64583 14 7C14 8.35417 13.9896 9.3125 13.9688 9.875C13.9062 11.1458 13.5208 12.1354 12.8125 12.8438C12.125 13.5312 11.1458 13.8958 9.875 13.9375C9.3125 13.9792 8.35417 14 7 14C5.64583 14 4.6875 13.9792 4.125 13.9375C2.85417 13.875 1.875 13.5 1.1875 12.8125C0.916667 12.5625 0.697917 12.2708 0.53125 11.9375C0.364583 11.6042 0.239583 11.2812 0.15625 10.9688C0.09375 10.6562 0.0625 10.2917 0.0625 9.875C0.0208333 9.3125 0 8.35417 0 7C0 5.64583 0.0208333 4.67708 0.0625 4.09375C0.125 2.84375 0.5 1.875 1.1875 1.1875C1.875 0.479167 2.85417 0.09375 4.125 0.03125C4.6875 0.0104167 5.64583 0 7 0C8.35417 0 9.3125 0.0104167 9.875 0.03125C11.1458 0.09375 12.125 0.479167 12.8125 1.1875C13.5208 1.875 13.9062 2.85417 13.9688 4.125ZM12.4688 11.125C12.5312 10.9583 12.5833 10.75 12.625 10.5C12.6667 10.2292 12.6979 9.91667 12.7188 9.5625C12.7396 9.1875 12.75 8.88542 12.75 8.65625C12.75 8.42708 12.75 8.10417 12.75 7.6875C12.75 7.27083 12.75 7.04167 12.75 7C12.75 6.9375 12.75 6.70833 12.75 6.3125C12.75 5.89583 12.75 5.57292 12.75 5.34375C12.75 5.11458 12.7396 4.82292 12.7188 4.46875C12.6979 4.09375 12.6667 3.78125 12.625 3.53125C12.5833 3.26042 12.5312 3.04167 12.4688 2.875C12.2188 2.22917 11.7708 1.78125 11.125 1.53125C10.9583 1.46875 10.7396 1.41667 10.4688 1.375C10.2188 1.33333 9.90625 1.30208 9.53125 1.28125C9.17708 1.26042 8.88542 1.25 8.65625 1.25C8.44792 1.25 8.125 1.25 7.6875 1.25C7.27083 1.25 7.04167 1.25 7 1.25C6.95833 1.25 6.72917 1.25 6.3125 1.25C5.89583 1.25 5.57292 1.25 5.34375 1.25C5.11458 1.25 4.8125 1.26042 4.4375 1.28125C4.08333 1.30208 3.77083 1.33333 3.5 1.375C3.25 1.41667 3.04167 1.46875 2.875 1.53125C2.22917 1.78125 1.78125 2.22917 1.53125 2.875C1.46875 3.04167 1.41667 3.26042 1.375 3.53125C1.33333 3.78125 1.30208 4.09375 1.28125 4.46875C1.26042 4.82292 1.25 5.11458 1.25 5.34375C1.25 5.55208 1.25 5.875 1.25 6.3125C1.25 6.72917 1.25 6.95833 1.25 7C1.25 7.08333 1.25 7.28125 1.25 7.59375C1.25 7.88542 1.25 8.13542 1.25 8.34375C1.25 8.53125 1.25 8.78125 1.25 9.09375C1.27083 9.40625 1.29167 9.67708 1.3125 9.90625C1.33333 10.1146 1.36458 10.3333 1.40625 10.5625C1.44792 10.7917 1.48958 10.9792 1.53125 11.125C1.80208 11.7708 2.25 12.2188 2.875 12.4688C3.04167 12.5312 3.25 12.5833 3.5 12.625C3.77083 12.6667 4.08333 12.6979 4.4375 12.7188C4.8125 12.7396 5.10417 12.75 5.3125 12.75C5.54167 12.75 5.86458 12.75 6.28125 12.75C6.71875 12.75 6.95833 12.75 7 12.75C7.0625 12.75 7.29167 12.75 7.6875 12.75C8.10417 12.75 8.42708 12.75 8.65625 12.75C8.88542 12.75 9.17708 12.7396 9.53125 12.7188C9.90625 12.6979 10.2188 12.6667 10.4688 12.625C10.7396 12.5833 10.9583 12.5312 11.125 12.4688C11.7708 12.1979 12.2188 11.75 12.4688 11.125Z"
+                                fill="white" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <div class="slider">
+            <div class="slider-slide">
+                <div class="slider__content">
+                    <h2 class="sl-content__title">ITALIA & MODERNA</h2>
+                    <h4 class="sl-content__subtitle">SIMPLE, ELEGANT, AND PASSIONATELY ITALIAN</h4>
+                </div>
+                <img src="./assets/img/photo_1.jpg" alt class="slider-slide__img" />
+                <div class="btn">
+                    <button>More Info</button>
+                </div>
+            </div>
+
+            <div class="slider-slide">
+                <div class="slider__content">
+                    <h2 class="sl-content__title">ITALIA & MODERNA</h2>
+                    <h4 class="sl-content__subtitle">SIMPLE, ELEGANT, AND PASSIONATELY ITALIAN</h4>
+                </div>
+                <img src="./assets/img/photo_2.jpg" alt class="slider-slide__img" />
+            </div>
+
+            <div class="slider-slide">
+                <div class="slider__content">
+                    <h2 class="sl-content__title">ITALIA & MODERNA</h2>
+                    <h4 class="sl-content__subtitle">SIMPLE, ELEGANT, AND PASSIONATELY ITALIAN</h4>
+                </div>
+                <img src="./assets/img/photo_3.jpg" alt class="slider-slide__img" />
+            </div>
+
+            <div class="slider-slide">
+                <div class="slider__content">
+                    <h2 class="sl-content__title">ITALIA & MODERNA</h2>
+                    <h4 class="sl-content__subtitle">SIMPLE, ELEGANT, AND PASSIONATELY ITALIAN</h4>
+                </div>
+                <img src="./assets/img/photo_4.jpg" alt class="slider-slide__img" />
+            </div>
+
+            <div class="slider-slide">
+                <div class="slider__content">
+                    <h2 class="sl-content__title">ITALIA & MODERNA</h2>
+                    <h4 class="sl-content__subtitle">SIMPLE, ELEGANT, AND PASSIONATELY ITALIAN</h4>
+                </div>
+                <img src="./assets/img/photo_5.jpg" alt class="slider-slide__img" />
+            </div>
+
+            <div class="slider-slide">
+                <div class="slider__content">
+                    <h2 class="sl-content__title">ITALIA & MODERNA</h2>
+                    <h4 class="sl-content__subtitle">SIMPLE, ELEGANT, AND PASSIONATELY ITALIAN</h4>
+                </div>
+                <img src="./assets/img/photo_6.jpg" alt class="slider-slide__img" />
+            </div>
+        </div>
+        <div class="slider-arrow">
+            <svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                    d="M8.27009 0.502223C8.32589 0.558027 8.3538 0.622201 8.3538 0.694745C8.3538 0.76729 8.32589 0.831464 8.27009 0.887268L4.36942 4.78794C4.31362 4.84374 4.24944 4.87164 4.1769 4.87164C4.10435 4.87164 4.04018 4.84374 3.98438 4.78794L0.0837054 0.887268C0.0279018 0.831464 5.58794e-08 0.76729 5.58794e-08 0.694745C5.58794e-08 0.622201 0.0279018 0.558027 0.0837054 0.502223L0.502232 0.0836961C0.558036 0.0278928 0.62221 -8.91089e-06 0.694754 -8.91089e-06C0.767299 -8.91089e-06 0.831473 0.0278928 0.887277 0.0836961L4.1769 3.37332L7.46652 0.0836961C7.52232 0.0278928 7.5865 -8.91089e-06 7.65904 -8.91089e-06C7.73159 -8.91089e-06 7.79576 0.0278928 7.85156 0.0836961L8.27009 0.502223Z"
+                    fill="white" />
+            </svg>
+        </div>
+    </section>
+
+    <section class="section section__projects" id="project">
+        <div class="container">
+            <div class="section__header">
+                <div class="section__line"></div>
+                <h2 class="section__title">THE BEST YOU CAN SEE</h2>
+            </div>
+
+            <div class="project">
+                <div class="project__image">
+                    <div class="project__bg project__bg__yellow"></div>
+                    <img src="./assets/img/photo_7.jpg" />
+                </div>
+
+                <div class="project__content">
+                    <h4 class="project__subtitle">PALERMO</h4>
+                    <h3 class="project__title">OLD TOWN</h3>
+                    <p class="project__text">
+                        Walk through the sunlit streets of Palermo, where history breathes through every stone. Taste
+                        the aroma of espresso, hear the laughter of locals, and feel the pulse of true Sicilian life.
+                    </p>
+
+                    <a href="#" class="btn">MORE DETAILS</a>
+
+                    <p class="project__location">
+                        <svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6.42857 4.28577C6.42857 5.46601 5.46596 6.42862 4.28571 6.42862C3.10547 6.42862 2.14286 5.46601 2.14286 4.28577C2.14286 3.10552 3.10547 2.14291 4.28571 2.14291C5.46596 2.14291 6.42857 3.10552 6.42857 4.28577ZM8.57143 4.28577C8.57143 1.9169 6.65458 5.16772e-05 4.28571 5.16772e-05C1.91685 5.16772e-05 0 1.9169 0 4.28577C0 4.79637 0.0585938 5.32371 0.276228 5.78409L3.33147 12.2629C3.49888 12.6312 3.88393 12.8572 4.28571 12.8572C4.6875 12.8572 5.07254 12.6312 5.24833 12.2629L8.2952 5.78409C8.51284 5.32371 8.57143 4.79637 8.57143 4.28577Z"
+                                fill="#2C4058" />
+                        </svg>
+                        <a href="https://www.google.com/maps?q=Palermo,+Sicily,+Italy" target="_blank"
+                            rel="noopener noreferrer">
+                            Palermo, Sicily – Since 734 BC
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="project project__reverse">
+                <div class="project__image">
+                    <div class="project__bg project__bg__green"></div>
+                    <img src="./assets/img/photo_8.jpg" />
+                </div>
+
+                <div class="project__content">
+                    <h4 class="project__subtitle">PORTO</h4>
+                    <h3 class="project__title">DI CEFALÙ</h3>
+                    <p class="project__text">
+                        Where the mountains meet the sea, and pastel houses reflect in crystal water. Cefalù captures
+                        the essence of Italy — peaceful, colorful, and endlessly charming.
+                    </p>
+
+                    <a href="#" class="btn">MORE DETAILS</a>
+
+                    <p class="project__location">
+                        <svg width="9" height="13" viewBox="0 0 9 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M6.42857 4.28577C6.42857 5.46601 5.46596 6.42862 4.28571 6.42862C3.10547 6.42862 2.14286 5.46601 2.14286 4.28577C2.14286 3.10552 3.10547 2.14291 4.28571 2.14291C5.46596 2.14291 6.42857 3.10552 6.42857 4.28577ZM8.57143 4.28577C8.57143 1.9169 6.65458 5.16772e-05 4.28571 5.16772e-05C1.91685 5.16772e-05 0 1.9169 0 4.28577C0 4.79637 0.0585938 5.32371 0.276228 5.78409L3.33147 12.2629C3.49888 12.6312 3.88393 12.8572 4.28571 12.8572C4.6875 12.8572 5.07254 12.6312 5.24833 12.2629L8.2952 5.78409C8.51284 5.32371 8.57143 4.79637 8.57143 4.28577Z"
+                                fill="#2C4058" />
+                        </svg>
+                        <a href="https://www.google.com/maps?q=Cefalù,+Sicily,+Italy" target="_blank"
+                            rel="noopener noreferrer">
+                            Cefalù, Sicily – Mediterranean Coast
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section section__news" id="news">
+        <div class="section__news-line"></div>
+        <h2 class="section__news-title">LATEST NEWS</h2>
+
+        <div class="news__slider">
+            <div class="news__card">
+                <img src="./assets/img/photo_8.jpg" alt="">
+                <div class="news__content">
+                    <h3 class="news__headline">SAPORI DI ROMA</h3>
+                    <p class="news__text">
+                        Scopri i sapori e i profumi di Roma — un espresso al mattino, una passeggiata lungo il Tevere,
+                        la magia del tramonto sul Colosseo.
+                    </p>
+                    <div class="news__author">
+                        <img src="./assets/img/avatar_1.jpg" alt="">
+                        <div class="news__author-info">
+                            <span class="name">ALJA BRUN</span>
+                            <span class="date">20 Jan 2020</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news__card">
+                <img src="./assets/img/photo_9.jpg" alt="">
+                <div class="news__content">
+                    <h3 class="news__headline">LUCE DI VENEZIA</h3>
+                    <p class="news__text">
+                        Perditi tra i canali dorati di Venezia, dove l’acqua riflette l’anima della città e ogni gondola
+                        racconta una storia d’amore.
+                    </p>
+                    <div class="news__author">
+                        <img src="./assets/img/avatar_2.jpg" alt="">
+                        <div class="news__author-info">
+                            <span class="name">DOMINIC FREEMAN</span>
+                            <span class="date">13 Dec 2019</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news__card">
+                <img src="./assets/img/photo_10.jpg" alt="">
+                <div class="news__content">
+                    <h3 class="news__headline">SOGNI DI FIRENZE</h3>
+                    <p class="news__text">
+                        Firenze è un sogno fatto d’arte — i colori del Rinascimento, le ombre del Duomo, la luce di
+                        Michelangelo.
+                    </p>
+                    <div class="news__author">
+                        <img src="./assets/img/avatar_3.jpg" alt="">
+                        <div class="news__author-info">
+                            <span class="name">ALICE WARD</span>
+                            <span class="date">30 Nov 2019</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news__card">
+                <img src="./assets/img/photo_11.jpg" alt="">
+                <div class="news__content">
+                    <h3 class="news__headline">MAGIA DELLA SICILIA</h3>
+                    <p class="news__text">
+                        Immergiti nella magia della Sicilia — il sole, il mare e l’aroma delle arance che danzano
+                        nell’aria.
+                    </p>
+                    <div class="news__author">
+                        <img src="./assets/img/avatar_4.jpg" alt="">
+                        <div class="news__author-info">
+                            <span class="name">MARIK BIANCHI</span>
+                            <span class="date">25 Oct 2019</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="news__card">
+                <img src="./assets/img/photo_12.jpg" alt="">
+                <div class="news__content">
+                    <h3 class="news__headline">CUORE DELL’ITALIA</h3>
+                    <p class="news__text">
+                        Viaggia attraverso il cuore dell’Italia, tra colline toscane e vicoli napoletani. Ogni passo
+                        racconta una storia.
+                    </p>
+                    <div class="news__author">
+                        <img src="./assets/img/avatar_5.jpg" alt="">
+                        <div class="news__author-info">
+                            <span class="name">LUCA VENTURA</span>
+                            <span class="date">10 Sep 2019</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section__news-footer">
+        </div>
+    </section>
+    <section class="section section__gallery">
+        <h2 class="gallery__title">GALLERY</h2>
+
+        <div class="gallery__grid">
+            <a data-fslightbox="gallery" href="./assets/img/photo_1.jpg" class="gallery__item gallery__item--large">
+                <img src="./assets/img/photo_1.jpg" alt="Building 1">
+                <div class="zoom-icon">
+                    <svg width="70" height="70" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M28.4375 52.5C31.5974 52.5 34.7264 51.8776 37.6458 50.6684C40.5652 49.4591 43.2178 47.6867 45.4523 45.4523C47.6867 43.2178 49.4591 40.5652 50.6684 37.6458C51.8776 34.7264 52.5 31.5974 52.5 28.4375C52.5 25.2776 51.8776 22.1486 50.6684 19.2292C49.4591 16.3098 47.6867 13.6572 45.4523 11.4227C43.2178 9.18833 40.5652 7.4159 37.6458 6.20665C34.7264 4.9974 31.5974 4.375 28.4375 4.375C22.0557 4.375 15.9353 6.91015 11.4227 11.4227C6.91015 15.9353 4.375 22.0557 4.375 28.4375C4.375 34.8193 6.91015 40.9397 11.4227 45.4523C15.9353 49.9649 22.0557 52.5 28.4375 52.5ZM56.875 28.4375C56.875 35.9796 53.8789 43.2128 48.5458 48.5458C43.2128 53.8789 35.9796 56.875 28.4375 56.875C20.8954 56.875 13.6622 53.8789 8.32915 48.5458C2.99609 43.2128 0 35.9796 0 28.4375C0 20.8954 2.99609 13.6622 8.32915 8.32915C13.6622 2.99609 20.8954 0 28.4375 0C35.9796 0 43.2128 2.99609 48.5458 8.32915C53.8789 13.6622 56.875 20.8954 56.875 28.4375Z"
+                            fill="white" />
+                        <path
+                            d="M45.255 51.3714C45.3863 51.5464 45.5263 51.7126 45.6838 51.8745L62.5275 68.7182C63.3479 69.5392 64.4607 70.0006 65.6213 70.001C66.7818 70.0014 67.895 69.5408 68.7159 68.7204C69.5369 67.9001 69.9983 66.7872 69.9987 65.6267C69.9991 64.4661 69.5385 63.3529 68.7181 62.532L51.8744 45.6882C51.718 45.5299 51.5498 45.3836 51.3713 45.2507C49.655 47.5908 47.5927 49.6561 45.255 51.3757V51.3714Z"
+                            fill="white" />
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M28.4375 13.125C29.0177 13.125 29.5741 13.3555 29.9843 13.7657C30.3945 14.1759 30.625 14.7323 30.625 15.3125V26.25H41.5625C42.1427 26.25 42.6991 26.4805 43.1093 26.8907C43.5195 27.3009 43.75 27.8573 43.75 28.4375C43.75 29.0177 43.5195 29.5741 43.1093 29.9843C42.6991 30.3945 42.1427 30.625 41.5625 30.625H30.625V41.5625C30.625 42.1427 30.3945 42.6991 29.9843 43.1093C29.5741 43.5195 29.0177 43.75 28.4375 43.75C27.8573 43.75 27.3009 43.5195 26.8907 43.1093C26.4805 42.6991 26.25 42.1427 26.25 41.5625V30.625H15.3125C14.7323 30.625 14.1759 30.3945 13.7657 29.9843C13.3555 29.5741 13.125 29.0177 13.125 28.4375C13.125 27.8573 13.3555 27.3009 13.7657 26.8907C14.1759 26.4805 14.7323 26.25 15.3125 26.25H26.25V15.3125C26.25 14.7323 26.4805 14.1759 26.8907 13.7657C27.3009 13.3555 27.8573 13.125 28.4375 13.125Z"
+                            fill="white" />
+                    </svg>
+                </div>
+            </a>
+
+            <a data-fslightbox="gallery" href="./assets/img/photo_2.jpg"><img src="./assets/img/photo_2.jpg"
+                    alt="Building 2"></a>
+            <a data-fslightbox="gallery" href="./assets/img/photo_3.jpg"><img src="./assets/img/photo_3.jpg"
+                    alt="Building 3"></a>
+            <a data-fslightbox="gallery" href="./assets/img/photo_4.jpg"><img src="./assets/img/photo_4.jpg"
+                    alt="Building 4"></a>
+            <a data-fslightbox="gallery" href="./assets/img/photo_5.jpg"><img src="./assets/img/photo_5.jpg"
+                    alt="Building 5"></a>
+        </div>
+
+        <div class="gallery__extra">
+            <a data-fslightbox="gallery" href="./assets/img/photo_6.jpg"><img src="./assets/img/photo_6.jpg" alt=""></a>
+            <a data-fslightbox="gallery" href="./assets/img/photo_7.jpg"><img src="./assets/img/photo_7.jpg" alt=""></a>
+            <a data-fslightbox="gallery" href="./assets/img/photo_8.jpg"><img src="./assets/img/photo_8.jpg" alt=""></a>
+        </div>
+
+        <button class="btn gallery__toggle">SEE MORE</button>
+    </section>
+    <section class="section section__map" id="contact">
+        <div id="map" class="map"></div>
+        <div class="contact__card">
+            <h2 class="contact__title">GET IN TOUCH</h2>
+
+            <div class="contact__content">
+                <div class="contact__info">
+                    <ul>
+                        <li>📍 91 Nolan Extensions Suite 670</li>
+                        <li>📞 +01 356-868-2454</li>
+                        <li>📧 montichello@aservice.com</li>
+                        <li>🕒 From 07:05AM to 19:30PM</li>
+                    </ul>
+                </div>
+
+                <form class="contact__form">
+                    <input type="text" placeholder="Name" required />
+                    <input type="email" placeholder="Email" required />
+                    <button type="submit" class="btn">SUBMIT</button>
+                </form>
+            </div>
+        </div>
+        <div class="map__bottom">
+            <div class="container map__footer-container">
+                <div class="map__footer-left">
+                    <div class="header__logo">
+                        <img src="./assets/img/logo.png" alt="Monticello Logo" />
+                    </div>
+                    <p class="map__footer-copy">Copyrights © 2020 Monticello</p>
+                </div>
+
+                <div class="map__footer-socials">
+                    <a href="#" class="social__link">
+                        <svg width="9" height="16" viewBox="0 0 9 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M8 9H5.65625V16H2.53125V9H0V6.09375H2.53125V3.90625C2.53125 3.07292 2.6875 2.36458 3 1.78125C3.3125 1.19792 3.75 0.760417 4.3125 0.46875C4.89583 0.15625 5.5625 0 6.3125 0C6.64583 0 7 0.0208333 7.375 0.0625C7.75 0.0833333 8.04167 0.114583 8.25 0.15625L8.5625 0.1875V2.65625H7.3125C6.72917 2.65625 6.30208 2.8125 6.03125 3.125C5.78125 3.41667 5.65625 3.78125 5.65625 4.21875V6.09375H8.4375L8 9Z"
+                                fill="white" />
+                        </svg>
+                    </a>
+
+                    <a href="#" class="social__link">
+                        <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.3438 3.25C14.3646 3.33333 14.375 3.46875 14.375 3.65625C14.375 4.76042 14.1667 5.86458 13.75 6.96875C13.3333 8.05208 12.7396 9.05208 11.9688 9.96875C11.2188 10.8646 10.2396 11.5938 9.03125 12.1562C7.82292 12.7188 6.48958 13 5.03125 13C3.19792 13 1.52083 12.5104 0 11.5312C0.229167 11.5521 0.489583 11.5625 0.78125 11.5625C2.30208 11.5625 3.66667 11.0938 4.875 10.1562C4.14583 10.1562 3.5 9.94792 2.9375 9.53125C2.39583 9.09375 2.02083 8.55208 1.8125 7.90625C2.02083 7.92708 2.21875 7.9375 2.40625 7.9375C2.69792 7.9375 2.98958 7.90625 3.28125 7.84375C2.78125 7.73958 2.33333 7.53125 1.9375 7.21875C1.54167 6.90625 1.22917 6.53125 1 6.09375C0.770833 5.63542 0.65625 5.14583 0.65625 4.625V4.5625C1.11458 4.83333 1.60417 4.97917 2.125 5C1.14583 4.33333 0.65625 3.41667 0.65625 2.25C0.65625 1.66667 0.8125 1.11458 1.125 0.59375C1.9375 1.61458 2.92708 2.42708 4.09375 3.03125C5.28125 3.63542 6.54167 3.96875 7.875 4.03125C7.83333 3.78125 7.8125 3.53125 7.8125 3.28125C7.8125 2.38542 8.125 1.61458 8.75 0.96875C9.39583 0.322917 10.1667 0 11.0625 0C12.0208 0 12.8229 0.34375 13.4688 1.03125C14.2188 0.885417 14.9167 0.625 15.5625 0.25C15.3125 1.02083 14.8333 1.625 14.125 2.0625C14.75 1.97917 15.375 1.80208 16 1.53125C15.5417 2.19792 14.9896 2.77083 14.3438 3.25Z"
+                                fill="white" />
+                        </svg>
+                    </a>
+
+                    <a href="#" class="social__link">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M4.4375 4.46875C5.14583 3.76042 6 3.40625 7 3.40625C8 3.40625 8.84375 3.76042 9.53125 4.46875C10.2396 5.15625 10.5938 6 10.5938 7C10.5938 8 10.2396 8.85417 9.53125 9.5625C8.84375 10.25 8 10.5938 7 10.5938C6 10.5938 5.14583 10.25 4.4375 9.5625C3.75 8.85417 3.40625 8 3.40625 7C3.40625 6 3.75 5.15625 4.4375 4.46875ZM5.34375 8.65625C5.80208 9.11458 6.35417 9.34375 7 9.34375C7.64583 9.34375 8.19792 9.11458 8.65625 8.65625C9.11458 8.19792 9.34375 7.64583 9.34375 7C9.34375 6.35417 9.11458 5.80208 8.65625 5.34375C8.19792 4.88542 7.64583 4.65625 7 4.65625C6.35417 4.65625 5.80208 4.88542 5.34375 5.34375C4.88542 5.80208 4.65625 6.35417 4.65625 7C4.65625 7.64583 4.88542 8.19792 5.34375 8.65625ZM11.3125 2.6875C11.4792 2.83333 11.5625 3.02083 11.5625 3.25C11.5625 3.47917 11.4792 3.67708 11.3125 3.84375C11.1667 4.01042 10.9792 4.09375 10.75 4.09375C10.5208 4.09375 10.3229 4.01042 10.1562 3.84375C9.98958 3.67708 9.90625 3.47917 9.90625 3.25C9.90625 3.02083 9.98958 2.83333 10.1562 2.6875C10.3229 2.52083 10.5208 2.4375 10.75 2.4375C10.9792 2.4375 11.1667 2.52083 11.3125 2.6875ZM13.9688 4.125C13.9896 4.6875 14 5.64583 14 7C14 8.35417 13.9896 9.3125 13.9688 9.875C13.9062 11.1458 13.5208 12.1354 12.8125 12.8438C12.125 13.5312 11.1458 13.8958 9.875 13.9375C9.3125 13.9792 8.35417 14 7 14C5.64583 14 4.6875 13.9792 4.125 13.9375C2.85417 13.875 1.875 13.5 1.1875 12.8125C0.916667 12.5625 0.697917 12.2708 0.53125 11.9375C0.364583 11.6042 0.239583 11.2812 0.15625 10.9688C0.09375 10.6562 0.0625 10.2917 0.0625 9.875C0.0208333 9.3125 0 8.35417 0 7C0 5.64583 0.0208333 4.67708 0.0625 4.09375C0.125 2.84375 0.5 1.875 1.1875 1.1875C1.875 0.479167 2.85417 0.09375 4.125 0.03125C4.6875 0.0104167 5.64583 0 7 0C8.35417 0 9.3125 0.0104167 9.875 0.03125C11.1458 0.09375 12.125 0.479167 12.8125 1.1875C13.5208 1.875 13.9062 2.85417 13.9688 4.125ZM12.4688 11.125C12.5312 10.9583 12.5833 10.75 12.625 10.5C12.6667 10.2292 12.6979 9.91667 12.7188 9.5625C12.7396 9.1875 12.75 8.88542 12.75 8.65625C12.75 8.42708 12.75 8.10417 12.75 7.6875C12.75 7.27083 12.75 7.04167 12.75 7C12.75 6.9375 12.75 6.70833 12.75 6.3125C12.75 5.89583 12.75 5.57292 12.75 5.34375C12.75 5.11458 12.7396 4.82292 12.7188 4.46875C12.6979 4.09375 12.6667 3.78125 12.625 3.53125C12.5833 3.26042 12.5312 3.04167 12.4688 2.875C12.2188 2.22917 11.7708 1.78125 11.125 1.53125C10.9583 1.46875 10.7396 1.41667 10.4688 1.375C10.2188 1.33333 9.90625 1.30208 9.53125 1.28125C9.17708 1.26042 8.88542 1.25 8.65625 1.25C8.44792 1.25 8.125 1.25 7.6875 1.25C7.27083 1.25 7.04167 1.25 7 1.25C6.95833 1.25 6.72917 1.25 6.3125 1.25C5.89583 1.25 5.57292 1.25 5.34375 1.25C5.11458 1.25 4.8125 1.26042 4.4375 1.28125C4.08333 1.30208 3.77083 1.33333 3.5 1.375C3.25 1.41667 3.04167 1.46875 2.875 1.53125C2.22917 1.78125 1.78125 2.22917 1.53125 2.875C1.46875 3.04167 1.41667 3.26042 1.375 3.53125C1.33333 3.78125 1.30208 4.09375 1.28125 4.46875C1.26042 4.82292 1.25 5.11458 1.25 5.34375C1.25 5.55208 1.25 5.875 1.25 6.3125C1.25 6.72917 1.25 6.95833 1.25 7C1.25 7.08333 1.25 7.28125 1.25 7.59375C1.25 7.88542 1.25 8.13542 1.25 8.34375C1.25 8.53125 1.25 8.78125 1.25 9.09375C1.27083 9.40625 1.29167 9.67708 1.3125 9.90625C1.33333 10.1146 1.36458 10.3333 1.40625 10.5625C1.44792 10.7917 1.48958 10.9792 1.53125 11.125C1.80208 11.7708 2.25 12.2188 2.875 12.4688C3.04167 12.5312 3.25 12.5833 3.5 12.625C3.77083 12.6667 4.08333 12.6979 4.4375 12.7188C4.8125 12.7396 5.10417 12.75 5.3125 12.75C5.54167 12.75 5.86458 12.75 6.28125 12.75C6.71875 12.75 6.95833 12.75 7 12.75C7.0625 12.75 7.29167 12.75 7.6875 12.75C8.10417 12.75 8.42708 12.75 8.65625 12.75C8.88542 12.75 9.17708 12.7396 9.53125 12.7188C9.90625 12.6979 10.2188 12.6667 10.4688 12.625C10.7396 12.5833 10.9583 12.5312 11.125 12.4688C11.7708 12.1979 12.2188 11.75 12.4688 11.125Z"
+                                fill="white" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script src="./js/fslightbox.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+
+</html>
