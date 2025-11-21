@@ -1,52 +1,88 @@
 'use strict';
 
-var playList = [
-    {
-        author: "LED ZEPPELIN",
-        song: "STAIRWAY TO HEAVEN"
-    },
-    {
-        author: "QUEEN",
-        song: "BOHEMIAN RHAPSODY"
-    },
-    {
-        author: "LYNYRD SKYNYRD",
-        song: "FREE BIRD"
-    },
-    {
-        author: "DEEP PURPLE",
-        song: "SMOKE ON THE WATER"
-    },
-    {
-        author: "JIMI HENDRIX",
-        song: "ALL ALONG THE WATCHTOWER"
-    },
-    {
-        author: "AC/DC",
-        song: "BACK IN BLACK"
-    },
-    {
-        author: "QUEEN",
-        song: "WE WILL ROCK YOU"
-    },
-    {
-        author: "METALLICA",
-        song: "ENTER SANDMAN"
-    }
-];
+// 1) Реалізуй клас, що описує коло. У класі повинні бути такі компоненти:
 
-var list = document.getElementById("playlist");
-for (var i = 0; i < playList.length; i++) {
-    var item = document.createElement("li");
-    item.textContent = playList[i].author + " — " + playList[i].song;
-    list.appendChild(item);
+class Circle {
+    constructor(radius) {
+        this.radius = radius;
+    }
+    get radius() {
+        return this._radius;
+    }
+    set radius(value) {
+        if (value <= 0) {
+            throw new Error('радіус має бути більше 0');
+        }
+        this._radius = value;
+    }
+    get diameter() {
+        return this._radius * 2;
+    }
+    calculateArea() {
+        return Math.PI * (this._radius ** 2);
+    }
+    calculateLength() {
+        return 2 * Math.PI * this._radius;
+    }
 }
 
-var buttonPlace = document.getElementById("buttonPlace");
-var button = document.createElement("button");
-button.textContent = "YouTube";
-button.classList.add("video-button");
-button.onclick = function() {
-  window.location.href = "https://www.youtube.com/watch?v=dnyrEoCJP_w";
-};
-buttonPlace.appendChild(button);
+let myCircle = new Circle(15);
+console.log('радіус: ' + myCircle.radius);
+console.log('діаметр: ' + myCircle.diameter);
+console.log('площа: ' + myCircle.calculateArea().toFixed(2));
+console.log('довжина: ' + myCircle.calculateLength().toFixed(2));
+
+myCircle.radius = 5;
+console.log('новий діаметр: ' + myCircle.diameter);
+
+try {
+    myCircle.radius = -10;
+} catch (e) {
+    console.error(e.message);
+}
+
+// 2) Реалізуй клас, що описує канцелярський маркер. У класі повинні бути такі компоненти:
+
+class Marker {
+    constructor(color, ink = 60) {
+        this.color = color;
+        this.ink = ink;
+    }
+
+    print(text) {
+        if (this.ink <= 0) {
+            alert('чорнила закінчились..');
+            return;
+        }
+
+        let printedText = '';
+
+        for (let char of text) {
+            if (this.ink <= 0) break;
+
+            if (char !== ' ' && char !== '\n' && char !== '\t') {
+                if (this.ink - 0.5 < 0) break;
+                this.ink -= 0.5;
+            }
+
+            printedText += char;
+        }
+
+        if (printedText.length === 0) {
+            alert('недостатньо чорнил, щоб надрукувати текст');
+            return;
+        }
+
+        const p = document.createElement('p');
+        p.innerText = printedText;
+        p.style.color = this.color;
+        document.body.append(p);
+
+        console.log('залишок чорнил: ' + this.ink.toFixed(1) + '%');
+    }
+}
+
+let blueMarker = new Marker('white', 10);
+blueMarker.print('Hello world!');
+blueMarker.print('Hello Ivan!');
+blueMarker.print('Hello Beetroot!');
