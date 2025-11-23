@@ -1,88 +1,108 @@
 'use strict';
 
-// 1) Реалізуй клас, що описує коло. У класі повинні бути такі компоненти:
-
-class Circle {
-    constructor(radius) {
-        this.radius = radius;
-    }
-    get radius() {
-        return this._radius;
-    }
-    set radius(value) {
-        if (value <= 0) {
-            throw new Error('радіус має бути більше 0');
+class Validator {
+    static validateName(name) {
+        if (!name || typeof name !== 'string') {
+            alert('некоректне ім’я');
+            return false;
         }
-        this._radius = value;
+        return true;
     }
-    get diameter() {
-        return this._radius * 2;
-    }
-    calculateArea() {
-        return Math.PI * (this._radius ** 2);
-    }
-    calculateLength() {
-        return 2 * Math.PI * this._radius;
+
+    static validateRole(role) {
+        if (role !== 'admin' && role !== 'user') {
+            alert('некоректна роль');
+            return false;
+        }
+        return true;
     }
 }
 
-let myCircle = new Circle(15);
-console.log('радіус: ' + myCircle.radius);
-console.log('діаметр: ' + myCircle.diameter);
-console.log('площа: ' + myCircle.calculateArea().toFixed(2));
-console.log('довжина: ' + myCircle.calculateLength().toFixed(2));
+class User {
+    #password;
+    constructor(name, role, password) {
+        if (!Validator.validateName(name)) return;
+        if (!Validator.validateRole(role)) return;
 
-myCircle.radius = 5;
-console.log('новий діаметр: ' + myCircle.diameter);
-
-try {
-    myCircle.radius = -10;
-} catch (e) {
-    console.error(e.message);
-}
-
-// 2) Реалізуй клас, що описує канцелярський маркер. У класі повинні бути такі компоненти:
-
-class Marker {
-    constructor(color, ink = 60) {
-        this.color = color;
-        this.ink = ink;
+        this.name = name;
+        this.role = role;
+        this.#password = password;
     }
 
-    print(text) {
-        if (this.ink <= 0) {
-            alert('чорнила закінчились..');
+    getName() {
+        return this.name;
+    }
+
+    getRole() {
+        return this.role;
+    }
+
+    login() {
+        console.log(`${this.name} увійшов`);
+    }
+
+    logout() {
+        console.log(`${this.name} вийшов`);
+    }
+
+    changeName(newName) {
+        if (!Validator.validateName(newName)) return;
+        this.name = newName;
+        console.log(`ім’я змінено на ${newName}`);
+    }
+
+    changePassword(oldPass, newPass) {
+        if (oldPass !== this.#password) {
+            alert('невірний пароль');
             return;
         }
-
-        let printedText = '';
-
-        for (let char of text) {
-            if (this.ink <= 0) break;
-
-            if (char !== ' ' && char !== '\n' && char !== '\t') {
-                if (this.ink - 0.5 < 0) break;
-                this.ink -= 0.5;
-            }
-
-            printedText += char;
-        }
-
-        if (printedText.length === 0) {
-            alert('недостатньо чорнил, щоб надрукувати текст');
-            return;
-        }
-
-        const p = document.createElement('p');
-        p.innerText = printedText;
-        p.style.color = this.color;
-        document.body.append(p);
-
-        console.log('залишок чорнил: ' + this.ink.toFixed(1) + '%');
+        this.#password = newPass;
+        console.log('пароль оновлено');
     }
 }
 
-let blueMarker = new Marker('white', 10);
-blueMarker.print('Hello world!');
-blueMarker.print('Hello Ivan!');
-blueMarker.print('Hello Beetroot!');
+class Admin extends User {
+    constructor(name, password) {
+        super(name, 'admin', password);
+        this._users = [];
+    }
+
+    addUser(user) {
+        this._users.push(user);
+        console.log(`користувача ${user.name} додано`);
+    }
+
+    removeUser(name) {
+        this._users = this._users.filter(u => u.name !== name);
+        console.log(`користувача ${name} видалено`);
+    }
+
+    changeUserRole(name, newRole) {
+        if (!Validator.validateRole(newRole)) return;
+
+        const user = this._users.find(u => u.name === name);
+        if (!user) return;
+
+        user.role = newRole;
+        console.log(`роль ${name} змінено на ${newRole}`);
+    }
+
+    getAllUsers() {
+        return this._users;
+    }
+
+    removeAllUsers() {
+        this._users = [];
+        console.log('всі користувачі видалені');
+    }
+}
+
+const admin = new Admin('Daniil', '1234pupupu');
+const u1 = new User('Ivan', 'user', '1234tytyty');
+const u2 = new User('Roman', 'user', '1234bum');
+admin.addUser(u1);
+admin.addUser(u2);
+console.log(admin.getAllUsers());
+admin.changeUserRole('Daniil', 'admin');
+admin.removeUser('Roman');
+admin.removeAllUsers();
