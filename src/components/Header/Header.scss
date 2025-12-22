@@ -1,0 +1,251 @@
+.header {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 12px 28px;
+    background: #ffffff;
+    border-radius: 22px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 100;
+
+    &__container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        z-index: 102;
+    }
+
+    &__logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        flex-shrink: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__title-block {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    &__title {
+        font-size: 22px;
+        font-weight: 800;
+        margin: 0;
+        color: #21354A;
+        white-space: nowrap;
+    }
+
+    &__subtitle {
+        font-size: 13px;
+        margin: 0;
+        opacity: 0.8;
+        text-align: left;
+    }
+
+    &__menu {
+        display: flex;
+        align-items: center;
+        gap: 52px;
+        flex: 1;
+        justify-content: space-between;
+        margin-left: 52px;
+    }
+
+    &__nav {
+        display: flex;
+        gap: 52px;
+    }
+
+    &__link {
+        font-size: 16px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        position: relative;
+        padding-bottom: 5px;
+        transition: color 0.3s;
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #21354A;
+            transition: width 0.3s ease-in-out;
+        }
+
+        &:hover {
+            color: #21354A;
+
+            &::after {
+                width: 100%;
+            }
+        }
+    }
+
+    &__auth {
+        display: flex;
+        gap: 12px;
+    }
+
+    &__btn {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+        font-family: inherit;
+
+        &--login {
+            background: transparent;
+            color: #333;
+            outline: none;
+
+            &:hover {
+                color: #21354A;
+                background: rgba(33, 53, 74, 0.05);
+            }
+        }
+
+        &--signup {
+            background: #21354A;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(33, 53, 74, 0.2);
+
+            &:hover {
+                transform: scale(1.03);
+                background: #1a2b3c;
+                box-shadow: 0 6px 20px rgba(33, 53, 74, 0.35);
+            }
+        }
+    }
+
+    &__burger {
+        display: none;
+    }
+
+    @media (max-width: 992px) {
+        padding: 12px 20px;
+
+        &__title {
+            font-size: 18px;
+        }
+        
+        &__subtitle {
+            display: none;
+        }
+
+        &__menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background-color: #ffffff;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-left: 0;
+            transition: right 0.4s ease-in-out;
+            z-index: 101;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.05);
+            
+            &.active {
+                right: 0;
+            }
+        }
+
+        &__nav {
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        &__link {
+            font-size: 24px;
+        }
+
+        &__auth {
+            flex-direction: column;
+            gap: 20px;
+            width: 80%;
+            
+            button {
+                width: 100%;
+                padding: 15px;
+            }
+        }
+
+        &__burger {
+            display: block;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+            z-index: 102;
+
+            span {
+                display: block;
+                position: absolute;
+                height: 3px;
+                width: 100%;
+                background: #21354A;
+                border-radius: 9px;
+                opacity: 1;
+                left: 0;
+                transform: rotate(0deg);
+                transition: .25s ease-in-out;
+
+                &:nth-child(1) { top: 0px; }
+                &:nth-child(2) { top: 9px; }
+                &:nth-child(3) { top: 18px; }
+            }
+
+            &.active {
+                span {
+                    &:nth-child(1) {
+                        top: 9px;
+                        transform: rotate(135deg);
+                    }
+                    &:nth-child(2) {
+                        opacity: 0;
+                        left: -60px;
+                    }
+                    &:nth-child(3) {
+                        top: 9px;
+                        transform: rotate(-135deg);
+                    }
+                }
+            }
+        }
+    }
+}

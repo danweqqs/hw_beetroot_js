@@ -1,0 +1,9 @@
+#root {
+  width: 100%;
+}
+
+.app-container {
+  padding: 30px;
+  min-height: 100vh;
+}
+
